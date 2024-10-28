@@ -1,0 +1,103 @@
+trigger:
+- '*'
+
+variables:
+  solution: '**/*.sln'
+  webProject: 'FoodOrdering/FoodOrdering.csproj'  # Target your web project here
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  pool:
+    vmImage: 'windows-latest'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build Job'
+    steps:
+    - task: NuGetToolInstaller@1
+      displayName: 'Install NuGet'
+
+    - task: NuGetCommand@2
+      displayName: 'Restore NuGet packages'
+      inputs:
+        command: 'restore'
+        restoreSolution: '$(solution)'
+
+    - task: VSBuild@1
+      displayName: 'Build Web Project for Deployment'
+      inputs:
+        solution: '$(webProject)'  # Only target web project for deployment
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=$(Build.ArtifactStagingDirectory) /p:OutDir=$(Build.ArtifactStagingDirectory) /p:OutputPath=$(Build.ArtifactStagingDirectory)\bin'
+        clean: true
+
+    # Add NUnit Test Execution
+    - task: VSBuild@1
+      displayName: 'Build Test Project'
+      inputs:
+        solution: 'FoodOrdering/FoodOrdering.Tests/FoodOrdering.Tests.csproj'  # Adjust to the location of your test project
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
+        clean: true
+
+    - task: VSTest@2
+      displayName: 'Run NUnit Tests'
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\$(buildConfiguration)\*.Test.dll  # Ensure this points to your test assemblies
+          !**\obj\**
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        vsTestVersion: 'latest'
+        runInParallel: true
+        testFiltercriteria: 'FullyQualifiedName~NUnit'  # Run NUnit tests
+
+    - task: CopyFiles@2
+      displayName: 'Copy Files to Package'
+      inputs:
+        SourceFolder: '$(Build.ArtifactStagingDirectory)'
+        Contents: '**/*'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/package'
+
+    - task: ArchiveFiles@2
+      displayName: 'Create .zip Package'
+      inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/package'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/drop.zip'
+        replaceExistingArchive: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Build Artifacts'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/drop.zip'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+- stage: Deploy
+  displayName: 'Deploy the web application'
+  dependsOn: Build
+  jobs:
+  - deployment: Deploy
+    pool:
+      vmImage: 'ubuntu-20.04'
+    environment: dev
+    variables:
+    - group: Release
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+          - task: AzureWebApp@1
+            displayName: 'Azure App Service Deploy: website'
+            inputs:
+              azureSubscription: 'Azure subscription 1'
+              appName: '$(food-ordering-system)'
+              package: '$(Pipeline.Workspace)/drop/drop.zip'
+              deploymentMethod: 'zipDeploy'
