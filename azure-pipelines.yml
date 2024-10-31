@@ -3,7 +3,7 @@ trigger:
 
 variables:
   solution: '**/*.sln'
-  webProject: 'FoodOrdering/FoodOrdering.csproj'  # Target your web project here
+  webProject: 'FoodOrdering/FoodOrdering.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
