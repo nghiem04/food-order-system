@@ -97,7 +97,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: 'dea344f5-b052-4f94-873b-6427adabca63'
+              azureSubscription: 'Azure subscription 1'
               appName: '$(food-ordering-system)'
               package: '$(Pipeline.Workspace)/drop/drop.zip'
               deploymentMethod: 'zipDeploy'
