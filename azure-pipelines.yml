@@ -16,6 +16,16 @@ stages:
   - job: BuildJob
     displayName: 'Build Job'
     steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '8.0.400'  # Matches the version in your global.json
+        installationPath: $(Agent.ToolsDirectory)/dotnet
+
+    - script: |
+        dotnet --version
+      displayName: 'Check .NET SDK Version'
+
     - task: NuGetToolInstaller@1
       displayName: 'Install NuGet'
 
@@ -34,11 +44,10 @@ stages:
         msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=$(Build.ArtifactStagingDirectory) /p:OutDir=$(Build.ArtifactStagingDirectory) /p:OutputPath=$(Build.ArtifactStagingDirectory)\bin'
         clean: true
 
-    # Add NUnit Test Execution
     - task: VSBuild@1
       displayName: 'Build Test Project'
       inputs:
-        solution: 'FoodOrdering/FoodOrdering.Tests/FoodOrdering.Tests.csproj'  # Adjust to the location of your test project
+        solution: 'FoodOrdering/FoodOrdering.Tests/FoodOrdering.Tests.csproj'
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
         clean: true
@@ -48,12 +57,11 @@ stages:
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: |
-          **\$(buildConfiguration)\*.Test.dll  
+          **\$(buildConfiguration)\*Tests.dll  
           !**\obj\**
         searchFolder: '$(System.DefaultWorkingDirectory)'
         vsTestVersion: 'latest'
         runInParallel: true
-        testFiltercriteria: 'FullyQualifiedName~NUnit'  # Run NUnit tests
 
     - task: CopyFiles@2
       displayName: 'Copy Files to Package'
