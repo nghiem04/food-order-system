@@ -48,7 +48,7 @@ stages:
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: |
-          **/$(buildConfiguration)/**/*.Tests.dll
+          **\$(buildConfiguration)\*.Test.dll  
           !**\obj\**
         searchFolder: '$(System.DefaultWorkingDirectory)'
         vsTestVersion: 'latest'
