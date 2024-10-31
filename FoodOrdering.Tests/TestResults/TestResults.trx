@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="8bbed082-38b2-4cca-80ff-29b5695b423a" name="nghin@NGHI 2024-10-10 13:03:28" runUser="NGHI\nghin" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2024-10-10T13:03:28.9389451+11:00" queuing="2024-10-10T13:03:28.9389458+11:00" start="2024-10-10T13:03:25.7025744+11:00" finish="2024-10-10T13:03:28.9514287+11:00" />
+  <TestSettings name="default" id="a6e95c71-62d0-42f8-8f5f-6fc8564d5bda">
+    <Deployment runDeploymentRoot="nghin_NGHI_2024-10-10_13_03_28" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="40760e08-9c67-4f52-ae3a-ae983f7ab57e" testId="a7e459b6-0a0a-64d7-3782-55aeeb1e641d" testName="UpdateItemQuantity_ShouldChangeQuantityCorrectly" computerName="NGHI" duration="00:00:00.0060000" startTime="2024-10-10T13:03:28.6290052+11:00" endTime="2024-10-10T13:03:28.6311011+11:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="40760e08-9c67-4f52-ae3a-ae983f7ab57e" />
+    <UnitTestResult executionId="d7f6d412-8d1b-453f-a8a5-5b71d5186992" testId="0d42237d-e360-16d6-0c0f-ad0782fb590a" testName="CanCheckout_ShouldReturnTrueIfAllItemsAreAvailable" computerName="NGHI" duration="00:00:00.0030000" startTime="2024-10-10T13:03:28.6238500+11:00" endTime="2024-10-10T13:03:28.6254910+11:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d7f6d412-8d1b-453f-a8a5-5b71d5186992" />
+    <UnitTestResult executionId="76302e87-ce69-4f9d-a3f3-c02fa318a241" testId="20ce0365-2685-8a14-db28-0cbb680387f0" testName="CalculateItemTotal_ShouldReturnCorrectTotal" computerName="NGHI" duration="00:00:00.1180000" startTime="2024-10-10T13:03:28.4835855+11:00" endTime="2024-10-10T13:03:28.5993247+11:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="76302e87-ce69-4f9d-a3f3-c02fa318a241" />
+    <UnitTestResult executionId="779224f4-4ae8-41a9-b3e3-ddba7c3f06f1" testId="2ee2d1f3-ba71-43d8-c477-ae478a32ad9d" testName="RemoveItem_ShouldRemoveItemFromCart" computerName="NGHI" duration="00:00:00.0020000" startTime="2024-10-10T13:03:28.6254910+11:00" endTime="2024-10-10T13:03:28.6290052+11:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="779224f4-4ae8-41a9-b3e3-ddba7c3f06f1" />
+    <UnitTestResult executionId="b9c59d7c-045d-44c0-aaf1-81642725024f" testId="27fe698c-1a6a-790c-e6a8-2d6cfbe6cfdf" testName="CanCheckout_ShouldReturnFalseIfStockIsInsufficient" computerName="NGHI" duration="00:00:00.0120000" startTime="2024-10-10T13:03:28.6112045+11:00" endTime="2024-10-10T13:03:28.6238500+11:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b9c59d7c-045d-44c0-aaf1-81642725024f" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CanCheckout_ShouldReturnTrueIfAllItemsAreAvailable" storage="c:\users\nghin\downloads\food-order-system\foodordering.tests\bin\release\net48\foodordering.tests.dll" id="0d42237d-e360-16d6-0c0f-ad0782fb590a">
+      <Execution id="d7f6d412-8d1b-453f-a8a5-5b71d5186992" />
+      <TestMethod codeBase="C:\Users\nghin\Downloads\food-order-system\FoodOrdering.Tests\bin\Release\net48\FoodOrdering.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="FoodOrdering.Tests.CartManagerTests" name="CanCheckout_ShouldReturnTrueIfAllItemsAreAvailable" />
+    </UnitTest>
+    <UnitTest name="RemoveItem_ShouldRemoveItemFromCart" storage="c:\users\nghin\downloads\food-order-system\foodordering.tests\bin\release\net48\foodordering.tests.dll" id="2ee2d1f3-ba71-43d8-c477-ae478a32ad9d">
+      <Execution id="779224f4-4ae8-41a9-b3e3-ddba7c3f06f1" />
+      <TestMethod codeBase="C:\Users\nghin\Downloads\food-order-system\FoodOrdering.Tests\bin\Release\net48\FoodOrdering.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="FoodOrdering.Tests.CartManagerTests" name="RemoveItem_ShouldRemoveItemFromCart" />
+    </UnitTest>
+    <UnitTest name="UpdateItemQuantity_ShouldChangeQuantityCorrectly" storage="c:\users\nghin\downloads\food-order-system\foodordering.tests\bin\release\net48\foodordering.tests.dll" id="a7e459b6-0a0a-64d7-3782-55aeeb1e641d">
+      <Execution id="40760e08-9c67-4f52-ae3a-ae983f7ab57e" />
+      <TestMethod codeBase="C:\Users\nghin\Downloads\food-order-system\FoodOrdering.Tests\bin\Release\net48\FoodOrdering.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="FoodOrdering.Tests.CartManagerTests" name="UpdateItemQuantity_ShouldChangeQuantityCorrectly" />
+    </UnitTest>
+    <UnitTest name="CalculateItemTotal_ShouldReturnCorrectTotal" storage="c:\users\nghin\downloads\food-order-system\foodordering.tests\bin\release\net48\foodordering.tests.dll" id="20ce0365-2685-8a14-db28-0cbb680387f0">
+      <Execution id="76302e87-ce69-4f9d-a3f3-c02fa318a241" />
+      <TestMethod codeBase="C:\Users\nghin\Downloads\food-order-system\FoodOrdering.Tests\bin\Release\net48\FoodOrdering.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="FoodOrdering.Tests.CartManagerTests" name="CalculateItemTotal_ShouldReturnCorrectTotal" />
+    </UnitTest>
+    <UnitTest name="CanCheckout_ShouldReturnFalseIfStockIsInsufficient" storage="c:\users\nghin\downloads\food-order-system\foodordering.tests\bin\release\net48\foodordering.tests.dll" id="27fe698c-1a6a-790c-e6a8-2d6cfbe6cfdf">
+      <Execution id="b9c59d7c-045d-44c0-aaf1-81642725024f" />
+      <TestMethod codeBase="C:\Users\nghin\Downloads\food-order-system\FoodOrdering.Tests\bin\Release\net48\FoodOrdering.Tests.dll" adapterTypeName="executor://nunit3testexecutor/" className="FoodOrdering.Tests.CartManagerTests" name="CanCheckout_ShouldReturnFalseIfStockIsInsufficient" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="a7e459b6-0a0a-64d7-3782-55aeeb1e641d" executionId="40760e08-9c67-4f52-ae3a-ae983f7ab57e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0d42237d-e360-16d6-0c0f-ad0782fb590a" executionId="d7f6d412-8d1b-453f-a8a5-5b71d5186992" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="20ce0365-2685-8a14-db28-0cbb680387f0" executionId="76302e87-ce69-4f9d-a3f3-c02fa318a241" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2ee2d1f3-ba71-43d8-c477-ae478a32ad9d" executionId="779224f4-4ae8-41a9-b3e3-ddba7c3f06f1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="27fe698c-1a6a-790c-e6a8-2d6cfbe6cfdf" executionId="b9c59d7c-045d-44c0-aaf1-81642725024f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started&#xD;
+Running all tests in C:\Users\nghin\Downloads\food-order-system\FoodOrdering.Tests\bin\Release\net48\FoodOrdering.Tests.dll&#xD;
+   NUnit3TestExecutor discovered 5 of 5 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+NUnit Adapter 4.6.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

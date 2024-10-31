@@ -1,0 +1,115 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering.Tests\\FoodOrdering.Tests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering.Tests\\FoodOrdering.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering.Tests\\FoodOrdering.Tests.csproj",
+        "projectName": "FoodOrdering.Tests",
+        "projectPath": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering.Tests\\FoodOrdering.Tests.csproj",
+        "packagesPath": "C:\\Users\\nghin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\nghin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {
+              "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering\\FoodOrdering.csproj": {
+                "projectPath": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering\\FoodOrdering.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.11.1, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.72, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
+            "coverlet.collector": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering\\FoodOrdering.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering\\FoodOrdering.csproj",
+        "projectName": "FoodOrdering",
+        "projectPath": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering\\FoodOrdering.csproj",
+        "packagesPath": "C:\\Users\\nghin\\.nuget\\packages\\",
+        "projectStyle": "PackagesConfig",
+        "configFilePaths": [
+          "C:\\Users\\nghin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low"
+        },
+        "packagesConfigPath": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering\\packages.config"
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+# Set default behavior to automatically normalize line endings.
+* text=auto
+
+# Explicitly set line endings for specific file types.
+*.cs text eol=lf
+*.aspx text eol=lf
+*.config text eol=lf
+*.sln text eol=lf
+*.csproj text eol=lf
+*.user text eol=lf
