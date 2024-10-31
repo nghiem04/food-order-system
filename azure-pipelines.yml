@@ -28,7 +28,7 @@ stages:
     - task: VSBuild@1
       displayName: 'Build Web Project for Deployment'
       inputs:
-        solution: '$(webProject)'  # Only target web project for deployment
+        solution: '$(webProject)'  
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
         msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=$(Build.ArtifactStagingDirectory) /p:OutDir=$(Build.ArtifactStagingDirectory) /p:OutputPath=$(Build.ArtifactStagingDirectory)\bin'
