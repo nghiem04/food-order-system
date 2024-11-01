@@ -4,7 +4,7 @@ trigger:
 variables:
   solution: '**/*.sln'
   webProject: 'FoodOrdering/FoodOrdering.csproj'  
-  testProject: 'FoodOrdering/FoodOrdering.Tests/FoodOrdering.Tests.csproj'
+  testProject: 'FoodOrdering.Tests/FoodOrdering.Tests.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
