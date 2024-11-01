@@ -24,7 +24,6 @@ stages:
       inputs:
         command: 'restore'
         restoreSolution: '$(solution)'
-        packagesDirectory: '$(Build.ArtifactStagingDirectory)/packages'
 
     - task: VSBuild@1
       displayName: 'Build Web Project for Deployment'
@@ -39,7 +38,7 @@ stages:
     - task: VSBuild@1
       displayName: 'Build Test Project'
       inputs:
-        solution: 'FoodOrdering.Tests/FoodOrdering.Tests.csproj'  
+        solution: 'FoodOrdering/FoodOrdering.Tests/FoodOrdering.Tests.csproj'  
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
         clean: true
