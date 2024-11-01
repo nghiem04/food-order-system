@@ -34,7 +34,6 @@ stages:
         msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=$(Build.ArtifactStagingDirectory) /p:OutDir=$(Build.ArtifactStagingDirectory) /p:OutputPath=$(Build.ArtifactStagingDirectory)\bin'
         clean: true
 
-    # Remove separate build for test project since building the solution includes it
     # Run NUnit Test Execution
     - task: VSTest@2
       displayName: 'Run NUnit Tests'
