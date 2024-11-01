@@ -39,7 +39,7 @@ stages:
     - task: VSBuild@1
       displayName: 'Build Test Project'
       inputs:
-        solution: 'FoodOrdering/FoodOrdering.Tests/FoodOrdering.Tests.csproj'  
+        solution: 'FoodOrdering.Tests/FoodOrdering.Tests.csproj'  
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
         clean: true
