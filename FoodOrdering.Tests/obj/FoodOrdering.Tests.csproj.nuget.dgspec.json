@@ -85,27 +85,11 @@
         "projectUniqueName": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering\\FoodOrdering.csproj",
         "projectName": "FoodOrdering",
         "projectPath": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering\\FoodOrdering.csproj",
-        "packagesPath": "C:\\Users\\nghin\\.nuget\\packages\\",
-        "projectStyle": "PackagesConfig",
-        "configFilePaths": [
-          "C:\\Users\\nghin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
         "frameworks": {
           "net48": {
             "projectReferences": {}
           }
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low"
-        },
-        "packagesConfigPath": "C:\\Users\\nghin\\OneDrive\\Desktop\\food-order-system\\FoodOrdering\\packages.config"
+        }
       },
       "frameworks": {
         "net48": {}
