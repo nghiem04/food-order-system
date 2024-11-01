@@ -2,9 +2,8 @@ trigger:
 - '*'
 
 variables:
-  solution: '**/*.sln'
+  solution: 'FoodOrdering.sln'
   webProject: 'FoodOrdering/FoodOrdering.csproj'  
-  testProject: 'FoodOrdering.Tests/FoodOrdering.Tests.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -27,22 +26,16 @@ stages:
         restoreSolution: '$(solution)'
 
     - task: VSBuild@1
-      displayName: 'Build Web Project for Deployment'
+      displayName: 'Build Solution for Deployment'
       inputs:
-        solution: '$(webProject)' 
+        solution: '$(solution)' 
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
         msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=$(Build.ArtifactStagingDirectory) /p:OutDir=$(Build.ArtifactStagingDirectory) /p:OutputPath=$(Build.ArtifactStagingDirectory)\bin'
         clean: true
 
-    - task: VSBuild@1
-      displayName: 'Build Test Project'
-      inputs:
-        solution: '$(testProject)'  
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
-        clean: true
-
+    # Remove separate build for test project since building the solution includes it
+    # Run NUnit Test Execution
     - task: VSTest@2
       displayName: 'Run NUnit Tests'
       inputs:
