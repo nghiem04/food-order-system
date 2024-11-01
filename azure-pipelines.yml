@@ -4,6 +4,7 @@ trigger:
 variables:
   solution: '**/*.sln'
   webProject: 'FoodOrdering/FoodOrdering.csproj'  
+  testProject: 'FoodOrdering/FoodOrdering.Tests/FoodOrdering.Tests.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -34,11 +35,10 @@ stages:
         msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=$(Build.ArtifactStagingDirectory) /p:OutDir=$(Build.ArtifactStagingDirectory) /p:OutputPath=$(Build.ArtifactStagingDirectory)\bin'
         clean: true
 
-    # Add NUnit Test Execution
     - task: VSBuild@1
       displayName: 'Build Test Project'
       inputs:
-        solution: 'FoodOrdering/FoodOrdering.Tests/FoodOrdering.Tests.csproj'  
+        solution: '$(testProject)'  
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
         clean: true
