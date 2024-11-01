@@ -26,12 +26,21 @@ stages:
         restoreSolution: '$(solution)'
 
     - task: VSBuild@1
-      displayName: 'Build Solution for Deployment'
+      displayName: 'Build Solution'
       inputs:
         solution: '$(solution)' 
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
-        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=$(Build.ArtifactStagingDirectory) /p:OutDir=$(Build.ArtifactStagingDirectory) /p:OutputPath=$(Build.ArtifactStagingDirectory)\bin'
+        clean: true
+
+    # Only package the web project to avoid deploying test project
+    - task: VSBuild@1
+      displayName: 'Package Web Project for Deployment'
+      inputs:
+        solution: '$(webProject)' 
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=$(Build.ArtifactStagingDirectory) /p:OutDir=$(Build.ArtifactStagingDirectory) /p:OutputPath=$(Build.ArtifactStagingDirectory)\bin /p:ExcludeFromPackageDeployment=true'
         clean: true
 
     # Run NUnit Test Execution
