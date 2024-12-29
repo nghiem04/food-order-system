@@ -120,14 +120,12 @@ Execute the following commands for testing:
 
 	1.	Restore and build the test project:
 
-	```dotnet restore
-		dotnet build --configuration Release
-	```
+	```dotnet restore```
+		
+	```dotnet build --configuration Release```
 
 	2. Run tests: 
-	```
-	dotnet test --logger "trx;LogFileName=TestResults.trx"
-	```
+	```dotnet test --logger "trx;LogFileName=TestResults.trx"```
 ---
 
 **Deployment** 
