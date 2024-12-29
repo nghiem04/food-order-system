@@ -3,24 +3,23 @@ trigger:
 
 variables:
   solution: 'FoodOrdering.sln'
-  webProject: 'FoodOrdering/FoodOrdering.csproj'  
+  webProject: 'FoodOrdering/FoodOrdering.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  artifactName: 'drop'
+  deploymentPackage: '$(Build.ArtifactStagingDirectory)/$(artifactName).zip'
 
 stages:
 - stage: Build
-  displayName: 'Build Stage'
-  pool:
-    vmImage: 'windows-latest'
+  displayName: 'Build and Package Stage'
   jobs:
   - job: BuildJob
     displayName: 'Build Job'
+    pool:
+      vmImage: 'windows-latest'
     steps:
-    - task: NuGetToolInstaller@1
-      displayName: 'Install NuGet'
-
     - task: NuGetCommand@2
-      displayName: 'Restore NuGet packages'
+      displayName: 'Restore NuGet Packages'
       inputs:
         command: 'restore'
         restoreSolution: '$(solution)'
@@ -28,77 +27,104 @@ stages:
     - task: VSBuild@1
       displayName: 'Build Solution'
       inputs:
-        solution: '$(solution)' 
+        solution: '$(solution)'
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
-        clean: true
 
-    # Only package the web project to avoid deploying test project
-    - task: VSBuild@1
-      displayName: 'Package Web Project for Deployment'
-      inputs:
-        solution: '$(webProject)' 
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
-        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageLocation=$(Build.ArtifactStagingDirectory) /p:OutDir=$(Build.ArtifactStagingDirectory) /p:OutputPath=$(Build.ArtifactStagingDirectory)\bin /p:ExcludeFromPackageDeployment=true'
-        clean: true
-
-    # Run NUnit Test Execution
     - task: VSTest@2
-      displayName: 'Run NUnit Tests'
+      displayName: 'Run Automated Tests'
       inputs:
         testSelector: 'testAssemblies'
         testAssemblyVer2: |
           **\$(buildConfiguration)\*.Test.dll
           !**\obj\**
-        searchFolder: '$(System.DefaultWorkingDirectory)'
-        vsTestVersion: 'latest'
         runInParallel: true
-        testFiltercriteria: 'FullyQualifiedName~NUnit'  # Run NUnit tests
-
-    - task: CopyFiles@2
-      displayName: 'Copy Files to Package'
-      inputs:
-        SourceFolder: '$(Build.ArtifactStagingDirectory)'
-        Contents: '**/*'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/package'
 
     - task: ArchiveFiles@2
-      displayName: 'Create .zip Package'
+      displayName: 'Package Build Artifacts'
       inputs:
-        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/package'
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
         includeRootFolder: false
         archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/drop.zip'
+        archiveFile: '$(deploymentPackage)'
         replaceExistingArchive: true
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Build Artifacts'
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/drop.zip'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+        PathtoPublish: '$(deploymentPackage)'
+        ArtifactName: '$(artifactName)'
 
 - stage: Deploy
-  displayName: 'Deploy the web application'
+  displayName: 'Deploy Stage'
   dependsOn: Build
   jobs:
-  - deployment: Deploy
-    pool:
-      vmImage: 'ubuntu-20.04'
+  - deployment: DevDeploy
+    displayName: 'Deploy to Development Environment'
     environment: dev
-    variables:
-    - group: Release
+    pool:
+      vmImage: 'ubuntu-latest'
     strategy:
       runOnce:
         deploy:
           steps:
           - download: current
-            artifact: drop
+            artifact: $(artifactName)
+
           - task: AzureWebApp@1
-            displayName: 'Azure App Service Deploy: website'
+            displayName: 'Deploy to Azure App Service (Dev)'
             inputs:
               azureSubscription: 'Azure subscription 1'
-              appName: '$(food-ordering-system)'
-              package: '$(Pipeline.Workspace)/drop/drop.zip'
+              appName: 'food-ordering-dev'
+              package: '$(Pipeline.Workspace)/$(artifactName)/$(artifactName).zip'
+              deploymentMethod: 'zipDeploy'
+
+- stage: Staging
+  displayName: 'Staging Deployment'
+  dependsOn: Deploy
+  condition: succeeded()
+  jobs:
+  - deployment: StagingDeploy
+    displayName: 'Deploy to Staging Environment'
+    environment: staging
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: $(artifactName)
+
+          - task: AzureWebApp@1
+            displayName: 'Deploy to Azure App Service (Staging)'
+            inputs:
+              azureSubscription: 'Azure subscription 1'
+              appName: 'food-ordering-staging'
+              package: '$(Pipeline.Workspace)/$(artifactName)/$(artifactName).zip'
+              deploymentMethod: 'zipDeploy'
+
+- stage: Production
+  displayName: 'Production Deployment'
+  dependsOn: Staging
+  condition: succeeded()
+  jobs:
+  - deployment: ProdDeploy
+    displayName: 'Deploy to Production Environment'
+    environment: production
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: $(artifactName)
+
+          - task: AzureWebApp@1
+            displayName: 'Deploy to Azure App Service (Production)'
+            inputs:
+              azureSubscription: 'Azure subscription 1'
+              appName: 'food-ordering-prod'
+              package: '$(Pipeline.Workspace)/$(artifactName)/$(artifactName).zip'
               deploymentMethod: 'zipDeploy'
